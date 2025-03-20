@@ -1,0 +1,34 @@
+First Occurrences
+Given two strings, find the first occurrence of all characters of second string in the first string and
+print the characters between the least and the highest index
+I/P: ZOHOCORPORATION PORT
+O/P: OHOCORPORAT
+Explanation: The index of P in first string is 7, O is 1, R is 6 and T is 11. The largest range is 1 – 11.
+So print the characters of the first string in this inex range i.e. OHOCORPORAT
+
+public class FirstOccurrences {
+    public static void main(String[] args) {
+        String str1 = "ZOHOCORPORATION";
+        String str2 = "PORT";
+
+        int minIndex = Integer.MAX_VALUE;
+        int maxIndex = Integer.MIN_VALUE;
+
+        for (int i = 0; i < str2.length(); i++) {
+            char ch = str2.charAt(i);
+            int index = str1.indexOf(ch);  // first occurrence of ch in str1
+            if (index != -1) {
+                if (index < minIndex) minIndex = index;
+                if (index > maxIndex) maxIndex = index;
+            }
+        }
+
+        if (minIndex != Integer.MAX_VALUE && maxIndex != Integer.MIN_VALUE) {
+            for (int i = minIndex; i <= maxIndex; i++) {
+                System.out.print(str1.charAt(i));
+            }
+        } else {
+            System.out.println("Characters not found!");
+        }
+    }
+}
