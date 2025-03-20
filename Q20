@@ -1,0 +1,52 @@
+Password Strength
+Find the strength of the given password string based on the conditions
+Four rules were given based on the type and no. of characters in the string.
+Weak – only Rule 1 is satisfied or Rule 1 is not satisfied
+Medium – Two rules are satisfied
+Good – Three rules satisfied
+Strong – All Four rules satisfied
+
+I/P: Qw!1        O/P: Weak
+I/P: Qwertyuiop  O/P: Medium
+I/P: QwertY123       O/P: Good
+I/P: Qwerty@123    O/P: Strong
+
+public class PasswordStrengthChecker {
+
+    public static void checkStrength(String password) {
+        boolean lengthRule = password.length() >= 8;
+        boolean uppercaseRule = false;
+        boolean digitRule = false;
+        boolean specialCharRule = false;
+
+        for (int i = 0; i < password.length(); i++) {
+            char ch = password.charAt(i);
+            if (Character.isUpperCase(ch)) uppercaseRule = true;
+            else if (Character.isDigit(ch)) digitRule = true;
+            else if (!Character.isLetterOrDigit(ch)) specialCharRule = true;
+        }
+
+        int ruleCount = 0;
+        if (lengthRule) ruleCount++;
+        if (uppercaseRule) ruleCount++;
+        if (digitRule) ruleCount++;
+        if (specialCharRule) ruleCount++;
+
+        if (ruleCount == 4) {
+            System.out.println("Strong");
+        } else if (ruleCount == 3) {
+            System.out.println("Good");
+        } else if (ruleCount == 2) {
+            System.out.println("Medium");
+        } else {
+            System.out.println("Weak");
+        }
+    }
+
+    public static void main(String[] args) {
+        checkStrength("Qw!1");         // Output: Weak
+        checkStrength("Qwertyuiop");   // Output: Medium
+        checkStrength("QwertY123");    // Output: Good
+        checkStrength("Qwerty@123");   // Output: Strong
+    }
+}
