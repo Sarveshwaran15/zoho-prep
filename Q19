@@ -1,0 +1,33 @@
+Pangram Checking
+Check whether all english alphabets are present in the given sentence or not
+I/P: abc defGhi JklmnOP QRStuv wxyz
+O/P: True
+I/P: abc defGhi JklmnOP QRStuv
+O/P: False
+
+public class PangramCheck {
+    public static void checkPangram(String sentence) {
+        boolean[] alphabet = new boolean[26]; // 26 letters
+        sentence = sentence.toLowerCase();
+
+        for (int i = 0; i < sentence.length(); i++) {
+            char ch = sentence.charAt(i);
+            if (ch >= 'a' && ch <= 'z') {
+                alphabet[ch - 'a'] = true;
+            }
+        }
+
+        for (boolean present : alphabet) {
+            if (!present) {
+                System.out.println("False");
+                return;
+            }
+        }
+        System.out.println("True");
+    }
+
+    public static void main(String[] args) {
+        checkPangram("abc defGhi JklmnOP QRStuv wxyz"); // Output: True
+        checkPangram("abc defGhi JklmnOP QRStuv"); // Output: False
+    }
+}
