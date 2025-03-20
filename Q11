@@ -1,0 +1,42 @@
+Print the word with odd letters – PROGRAM
+Sample Output-+4477
+P     P
+ R   R
+  O O
+   G
+  R R
+ A   A
+M     M
+
+public class Main {
+    public static void main(String[] args) {
+        printWordPattern("PROGRAM");
+    }
+
+    public static void printWordPattern(String word) {
+        int n = word.length();
+        int mid = n / 2;
+
+        // Upper half including middle row
+        for (int i = 0; i <= mid; i++) {
+            for (int j = 0; j < n; j++) {
+                if (j == i || j == n - i - 1)
+                    System.out.print(word.charAt(j));
+                else
+                    System.out.print(" ");
+            }
+            System.out.println();
+        }
+
+        // Lower half
+        for (int i = mid - 1; i >= 0; i--) {
+            for (int j = 0; j < n; j++) {
+                if (j == i || j == n - i - 1)
+                    System.out.print(word.charAt(j));
+                else
+                    System.out.print(" ");
+            }
+            System.out.println();
+        }
+    }
+}
