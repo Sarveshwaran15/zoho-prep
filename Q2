@@ -1,0 +1,56 @@
+Given a Boolean matrix mat[M][N] of size M X N, modify it such that if a matrix cell mat[i][j] is 1 then make its adjacent cells as 0.
+Input:
+1 0 1
+0 1 0
+1 1 1
+Output:
+0 0 0
+0 0 0
+1 0 1
+Explanation:
+For the cell mat[0][0] which is 1, its adjacent cells (mat[0][1] and mat[1][0]) are modified to 0.
+For the cell mat[1][1] which is 1, its adjacent cells (mat[0][1], mat[1][0], mat[1][2], and mat[2][1]) are modified to 0.
+The modification is not applied to the cell mat[2][2] as it doesn't have all four adjacent cells.
+
+class Main {
+    public static void main(String[] args) {
+        int[][] mat = {
+            {1, 0, 1},
+            {0, 1, 0},
+            {1, 1, 1}
+        };
+
+        int m = mat.length;
+        int n = mat[0].length;
+        boolean[][] visited = new boolean[m][n];
+
+        // First, mark the positions where original 1s are present
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (mat[i][j] == 1) {
+                    visited[i][j] = true;
+                }
+            }
+        }
+
+        // Now, set adjacent cells of original 1s to 0
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (visited[i][j]) {
+                    if (i > 0) mat[i - 1][j] = 0; // top
+                    if (i < m - 1) mat[i + 1][j] = 0; // bottom
+                    if (j > 0) mat[i][j - 1] = 0; // left
+                    if (j < n - 1) mat[i][j + 1] = 0; // right
+                }
+            }
+        }
+
+        // Print result
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(mat[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
