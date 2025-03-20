@@ -1,0 +1,39 @@
+Reverse the words in the given String1 from the first occurrence of String2 in String1 by maintaining white Spaces.
+example: String1 = Input: This is a test String only String2 = st Output: This is a only String test
+
+class Main {
+    public static void main(String[] args) {
+        String str1 = "This is a test String only";
+        String str2 = "st";
+        reverseFromOccurrence(str1, str2);
+    }
+
+    public static void reverseFromOccurrence(String str1, String str2) {
+        String[] words = str1.split(" ");
+        int index = -1;
+
+        // Find first word that contains str2
+        for (int i = 0; i < words.length; i++) {
+            if (words[i].contains(str2)) {
+                index = i;
+                break;
+            }
+        }
+        if (index == -1) {
+            System.out.println(str1); // String2 not found
+            return;
+        }
+
+        // Reverse part from index to end
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < index; i++) {
+            result.append(words[i]).append(" ");
+        }
+        for (int i = words.length - 1; i >= index; i--) {
+            result.append(words[i]);
+            if (i != index) result.append(" ");
+        }
+
+        System.out.println(result.toString().trim());
+    }
+}
