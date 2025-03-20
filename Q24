@@ -1,0 +1,41 @@
+Remove the palindrome
+Example 1:
+Input: Malayalam is my mother tongue
+Output: is my mother tongue
+
+
+public class RemovePalindromeWords {
+    
+    // Function to check palindrome
+    public static boolean isPalindrome(String word) {
+        int left = 0, right = word.length() - 1;
+        word = word.toLowerCase(); // Make it case-insensitive
+        while (left < right) {
+            if (word.charAt(left) != word.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+
+    // Function to remove palindrome words
+    public static String removePalindromes(String sentence) {
+        StringBuilder result = new StringBuilder();
+        String[] words = sentence.split(" ");
+        
+        for (String word : words) {
+            if (!isPalindrome(word)) {
+                result.append(word).append(" ");
+            }
+        }
+        return result.toString().trim();
+    }
+
+    public static void main(String[] args) {
+        String input = "Malayalam is my mother tongue";
+        String output = removePalindromes(input);
+        System.out.println(output); // Output: is my mother tongue
+    }
+}
