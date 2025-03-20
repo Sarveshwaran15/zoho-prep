@@ -1,0 +1,23 @@
+Given N. print the Latin Matrix (say N = 3). condition:  must not use strings(aka character literals), arrays (both 1D and 2D), inbuilt functions(like rotate).
+A   B   C
+B   C   A
+C   A   B
+
+import java.util.Scanner;
+
+public class LatinMatrix {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter N: ");
+        int n = sc.nextInt();
+
+        for (int row = 0; row < n; row++) {
+            for (int col = 0; col < n; col++) {
+                // Calculate character based on row and col
+                char ch = (char) ('A' + (row + col) % n);
+                System.out.print(ch + "\t");
+            }
+            System.out.println();
+        }
+    }
+}
