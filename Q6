@@ -1,0 +1,30 @@
+Print whether the version is upgraded, downgraded or not changed according to the input given.
+example: Input : Version1 4.8.2 Version2 4.8.4 Output: upgraded, Input : Version1 4.0.2 Version2 4.8.4 Output: downgraded
+
+class Main {
+    public static void main(String[] args) {
+        String version1 = "4.8.2";
+        String version2 = "4.8.4";
+        compareVersions(version1, version2);
+    }
+
+    public static void compareVersions(String v1, String v2) {
+        String[] ver1 = v1.split("\\.");
+        String[] ver2 = v2.split("\\.");
+        int len = Math.max(ver1.length, ver2.length);
+
+        for (int i = 0; i < len; i++) {
+            int num1 = i < ver1.length ? Integer.parseInt(ver1[i]) : 0;
+            int num2 = i < ver2.length ? Integer.parseInt(ver2[i]) : 0;
+
+            if (num1 < num2) {
+                System.out.println("upgraded");
+                return;
+            } else if (num1 > num2) {
+                System.out.println("downgraded");
+                return;
+            }
+        }
+        System.out.println("not changed");
+    }
+}
