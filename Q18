@@ -1,0 +1,31 @@
+Reverse the given string keeping the position of special characters intact
+
+public class ReverseStringSpecial {
+    public static void reverseString(String str) {
+        char[] result = new char[str.length()];
+        int left = 0, right = str.length() - 1;
+
+        // Initialize result with the same special characters at original positions
+        while (left <= right) {
+            if (!Character.isLetterOrDigit(str.charAt(left))) {
+                result[left] = str.charAt(left);
+                left++;
+            } else if (!Character.isLetterOrDigit(str.charAt(right))) {
+                result[right] = str.charAt(right);
+                right--;
+            } else {
+                result[left] = str.charAt(right);
+                result[right] = str.charAt(left);
+                left++;
+                right--;
+            }
+        }
+
+        System.out.println(new String(result));
+    }
+
+    public static void main(String[] args) {
+        String str = "a,b$c";
+        reverseString(str); // Output: c,b$a
+    }
+}
