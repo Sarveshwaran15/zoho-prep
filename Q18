@@ -1,31 +1,37 @@
 Reverse the given string keeping the position of special characters intact
 
-public class ReverseStringSpecial {
-    public static void reverseString(String str) {
-        char[] result = new char[str.length()];
-        int left = 0, right = str.length() - 1;
+public class ReverseStringSpecialInPlace {
 
-        // Initialize result with the same special characters at original positions
-        while (left <= right) {
-            if (!Character.isLetterOrDigit(str.charAt(left))) {
-                result[left] = str.charAt(left);
+    public static void reverseString(String str) {
+        char[] arr = str.toCharArray();
+        int left = 0, right = arr.length - 1;
+
+        while (left < right) {
+            // If left is special char, skip it
+            if (!Character.isLetterOrDigit(arr[left])) {
                 left++;
-            } else if (!Character.isLetterOrDigit(str.charAt(right))) {
-                result[right] = str.charAt(right);
+            }
+            // If right is special char, skip it
+            else if (!Character.isLetterOrDigit(arr[right])) {
                 right--;
-            } else {
-                result[left] = str.charAt(right);
-                result[right] = str.charAt(left);
+            }
+            // Both are letters/digits, swap them
+            else {
+                char temp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = temp;
                 left++;
                 right--;
             }
         }
 
-        System.out.println(new String(result));
+        // Print the reversed string
+        System.out.println(new String(arr));
     }
 
     public static void main(String[] args) {
-        String str = "a,b$c";
-        reverseString(str); // Output: c,b$a
+        reverseString("a,b$c");       // Output: c,b$a
+        reverseString("Ab,c,de!$");   // Output: ed,c,bA!$
+        reverseString("A@B#C");       // Output: C@B#A
     }
 }
